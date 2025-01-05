@@ -95,6 +95,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.12.1)
+      devise (>= 4.9.0)
     erubi (1.13.1)
     execjs (2.10.0)
     ffi (1.17.1-arm64-darwin)
@@ -239,6 +241,7 @@ DEPENDENCIES
   bootstrap
   debug
   devise
+  devise-i18n
   importmap-rails
   jbuilder
   jquery-rails
