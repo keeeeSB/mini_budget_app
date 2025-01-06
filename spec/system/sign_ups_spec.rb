@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "ユーザー登録", type: :system do
+RSpec.describe "ユーザー登録機能", type: :system do
   scenario "ユーザーは正常なユーザー登録ができる" do
     visit root_path
     click_link "新規登録"
