@@ -6,8 +6,15 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
+  devise_scope :user do
+    resources :users, only: [] do
+      resources :entries
+    end
+  end
+
   authenticated :user do
   end
 
   root "home#index"
+  resources :categories, only: [:create, :update]
 end
