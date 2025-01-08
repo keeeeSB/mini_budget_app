@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   authenticated :user do
+    root "entries#index", as: :authenticated_root
   end
 
   root "home#index"
