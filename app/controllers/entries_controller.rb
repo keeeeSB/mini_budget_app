@@ -2,17 +2,19 @@ class EntriesController < ApplicationController
 
   def index
     @entries = current_user.entries.order(created_at: :desc)
+    @total_expense = Entry.total_expense
   end
 
   def new
-    @entry = current_user.entries.build(entry_params)
+    @entry = current_user.entries.build
     end
   end
 
   def create
     @entry = current_user.entries.build(entry_params)
     if @entry.save
-      redirect_to @entry, success: "記録を作成しました。"
+      flash[:success] = "記録を作成しました。"
+      redirect_to @entry
     else
       flash.now[:danger] = "記録を作成できませんでした。"
       render :new, status: :unprocessable_entity
@@ -26,7 +28,8 @@ class EntriesController < ApplicationController
   def update
     @entry = current_user.entries.find(params[:id])
     if @entry.update(entry_params)
-      redirect_to @entry, success: "記録を更新しました。"
+      flash[:success] = "記録を更新できませんでした。"
+      redirect_to @entry
     else
       flash.now[:danger] = "記録を更新できませんでした。"
       render :edit, status: :unprocessable_entity
