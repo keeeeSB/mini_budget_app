@@ -1,0 +1,35 @@
+<h2 class="text-center mb-5">私たちの家計簿</h2>
+
+<p>
+  支出合計: <strong><%= number_to_currency(@total_expense) %></strong>
+</p>
+
+<%= link_to "新しい記録を追加", new_user_entry_path(current_user),
+                             class: "btn btn-outline-secondary btn-sm" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th>カテゴリ</th>
+      <th>金額</th>
+      <th>説明</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @entries.each do |entry| %>
+      <tr>
+        <td><%= entry.date %></td>
+        <td><%= entry.category %></td>
+        <td><%= number_to_currency(entry.amount) %></td>
+        <td><%= entry.description %></td>
+        <td>
+          <%= link_to "編集", edit_entry_path(entry), class: "btn btn-warning" %>
+          <%= link_to "削除", entry,
+                             data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

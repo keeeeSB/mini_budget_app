@@ -6,10 +6,8 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
-  devise_scope :user do
-    resources :users, only: [] do
-      resources :entries
-    end
+  resources :users, only: [:show] do
+    resources :entries
   end
 
   authenticated :user do
