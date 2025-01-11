@@ -1,7 +1,6 @@
 class Entry < ApplicationRecord
   belongs_to :user
-  has_many :category_entries, dependent: :destroy
-  has_many :categories, through: :category_entries
+  belongs_to :category
 
   validates :date, presence: true
   validates :amount, presence: true

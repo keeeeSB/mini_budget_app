@@ -1,6 +1,5 @@
 class Category < ApplicationRecord
-  has_many :category_entries, dependent: :destroy
-  has_many :categories, through: :category_entries
+  has_many :entries, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 end

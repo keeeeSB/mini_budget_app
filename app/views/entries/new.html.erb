@@ -1,6 +1,6 @@
 <h2 class="text-center mb-3">記録を作成</h2>
 
-<%= form_with(model: @entry, url: new_user_entry_path(current_user), local: true) do |f| %>
+<%= form_with(model: @entry, url: user_entries_path(current_user), local: true) do |f| %>
   <%= render "devise/shared/error_messages", resource: @entry %>
 
   <div class="mb-3">
@@ -10,21 +10,19 @@
 
   <div class="mb-3">
     <%= f.label :amount, "金額", class: "form-label" %>
-    <%= f.number_field :amount, class: "form-control" %>
+    <%= f.number_field :amount, step: 100, class: "form-control" %>
   </div>
 
-  <div class="mb-5">
+  <div class="mb-3">
     <%= f.label :description, "説明", class: "form-label" %>
     <%= f.text_area :description, class: "form-control" %>
   </div>
 
-  <% if @categories.present? %>
-    <div>
-      <%= f.label :category_id, "カテゴリーを選択", class: "form-label" %>
-      <%= f.select :category_id, options_from_collection_for_select(@categories, :id, :name),
-                                 { include_blank: " " }, class: "form-control" %>
-    </div>
-  <% end %>
+  <div class="mb-5">
+    <%= f.label :category_id, "カテゴリーを選択", class: "form-label" %>
+    <%= f.select :category_id, options_from_collection_for_select(@categories, :id, :name),
+                                { include_blank: "選択してください" }, class: "form-control" %>
+  </div>
 
   <div class="d-grid gap-2">
     <%= f.submit "作成", class: "btn btn-info" %>
