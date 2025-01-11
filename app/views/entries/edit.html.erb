@@ -1,0 +1,30 @@
+<h2 class="text-center mb-3">記録を編集</h2>
+
+<%= form_with(model: @entry, url: user_entries_path(current_user), local: true) do |f| %>
+  <%= render "devise/shared/error_messages", resource: @entry %>
+
+  <div class="mb-3">
+    <%= f.label :date, "日付", class: "form-label" %>
+    <%= f.date_field :date, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :amount, "金額", class: "form-label" %>
+    <%= f.number_field :amount, step: 100, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :description, "説明", class: "form-label" %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="mb-5">
+    <%= f.label :category_id, "カテゴリーを選択", class: "form-label" %>
+    <%= f.select :category_id, options_from_collection_for_select(@categories, :id, :name),
+                                { include_blank: "選択してください" }, class: "form-control" %>
+  </div>
+
+  <div class="d-grid gap-2">
+    <%= f.submit "更新", class: "btn btn-info" %>
+  </div>
+<% end %>
