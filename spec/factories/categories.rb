@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :category do
-    name { "食費" }
+    name { "電気代" }
   end
 end
