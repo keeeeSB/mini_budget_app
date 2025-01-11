@@ -7,14 +7,14 @@ class EntriesController < ApplicationController
 
   def new
     @entry = current_user.entries.build
-    end
+    @categories = Category.all
   end
 
   def create
     @entry = current_user.entries.build(entry_params)
     if @entry.save
       flash[:success] = "記録を作成しました。"
-      redirect_to @entry
+      redirect_to user_entry_path(@entry)
     else
       flash.now[:danger] = "記録を作成できませんでした。"
       render :new, status: :unprocessable_entity
@@ -29,10 +29,11 @@ class EntriesController < ApplicationController
     @entry = current_user.entries.find(params[:id])
     if @entry.update(entry_params)
       flash[:success] = "記録を更新できませんでした。"
-      redirect_to @entry
+      redirect_to user_entry_path(@entry)
     else
       flash.now[:danger] = "記録を更新できませんでした。"
       render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
